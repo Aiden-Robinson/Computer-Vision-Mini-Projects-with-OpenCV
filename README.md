@@ -26,3 +26,10 @@ Skills:
 `img[100:150,0:50]= tag` places this chunk somewhere else in the image
 
 <img width="350" height="350" src="https://user-images.githubusercontent.com/106715980/179334876-f0748b14-8aae-44fd-a16e-17ed539e66e2.png">
+
+## Capturing the Webcam
+`cap= cv2.VideoCapture(0)` captures the webcam
+
+`ret, frame= cap.read()` saves webcame information to a constantly updates an image called frame
+
+`cv2.imshow('frame', frame)` outputs this information in a new window
