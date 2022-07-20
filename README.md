@@ -45,3 +45,16 @@ Skills:
 
 <img width="400" height="350" src="https://user-images.githubusercontent.com/106715980/179877403-775116cb-9f03-4e84-8d04-e8a0972376a5.png">
 
+## Colour Isolation with Masks
+
+`lower_blue= np.array([90,50,50])` and `upper_blue= np.array([130,255,255])` defines 2 colours that will be used in the mask
+
+ `mask= cv2.inRange(hsv, lower_blue, upper_blue)` is a mask meaning it isolates all colours between the two specified ranges of colours
+ 
+ `result= cv2.bitwise_and(frame, frame, mask= mask)` is a function that takes a source image and a second image and blends them together using the mask. The mask is used as a function to determine whether or not it should keep a certain pixel. In our case we only have one image and we don’t want to blend two images together therefore we pass the same image twice.
+ 
+ In this small project, I seperated the blues and greens of my webcam using this tool
+
+<img width="450" height="700" src="https://user-images.githubusercontent.com/106715980/179880041-c94178c2-f212-4ffb-a3ea-3e15487b51f0.png">
+
+
