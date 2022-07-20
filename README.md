@@ -57,4 +57,23 @@ Skills:
 
 <img width="450" height="700" src="https://user-images.githubusercontent.com/106715980/179880041-c94178c2-f212-4ffb-a3ea-3e15487b51f0.png">
 
+## Corner Detection
+
+The image I tried corner detection on was a chess board.
+
+`img= cv2.imread('Assests/chessboard.jpg')` imports the image of the chessboard from filefolder
+
+`gray= cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)` the algorithm requires the image to be in greyscale to work
+
+`corners= cv2.goodFeaturesToTrack(gray, 100, 0.01, 10)` parameters are source image, number of corners, minimum confidence on a 0-1 scale, and minimum euclidian distance between points
+
+`x,y= corner.ravel()` assigns x and y coordinates to where the corners are. The .ravel(0 flattens the array
+
+`cv2.circle(img, (x,y),5, (255,0,0),-1)` draws a circle where all the corners are.
+
+<img width="350" height="350" src="https://user-images.githubusercontent.com/106715980/179884571-6ed2d9e2-8331-47ab-a420-919d0f4c9ed1.png">
+
+I then applied this algorithm to my webcam instead of the chessboard image
+
+<img width="400" height="350" src="https://user-images.githubusercontent.com/106715980/179884856-c6c80031-e400-4843-af81-9100beb2f4e5.png">
 
