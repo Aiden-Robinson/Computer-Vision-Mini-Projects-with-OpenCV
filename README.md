@@ -33,3 +33,15 @@ Skills:
 `ret, frame= cap.read()` saves webcame information to a constantly updates an image called frame
 
 `cv2.imshow('frame', frame)` outputs this information in a new window
+
+## Drawing Shapes and Text
+`img= cv2.line(frame,(0,0), (width, height), (255,0,0), 10)` draws a line on a certain image specifying the starting coodinates, ending coordinates, the BGR colour, and line thickness
+
+`img= cv2.rectangle(img, (100,100),(200,200),(0,0,255),-1)` draws a rectangle on a certain image specifying the top left coordinates, bottom right coordinates, the BGR colour and thickness
+
+`img= cv2.circle(img, (300,300), 60, (0,255,0),-1)` draws a circle on a certain image specifying the starting coordinates, the radius, the BGR colour, and the thickness
+
+`img= cv2.putText(img, 'Aiden is Great', (200,height-10), font,2, (255,255,255), 5, cv2.LINE_AA )` draws text in at a certain coordinate with a defined font, font magnification, BGR colour, thickness, and line type
+
+<img width="400" height="350" src="https://user-images.githubusercontent.com/106715980/179877403-775116cb-9f03-4e84-8d04-e8a0972376a5.png">
+
