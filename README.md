@@ -1,7 +1,7 @@
 # Learning-OpenCV
 Over the span of a few weeks I took the time to learn some tools in the OpenCV library. I will be sharing my learnings with a brief explanation of each concept
 
-Skills: 
+`Skills:` Using Masks, Face and Eye Detection, Object Detection, Corner Detection, , Drawing Shapes and Text, Image Pixel Manipulation, Accessing Webcam, 
 
 ## Loading an Image File
 `img= cv2.imread('Assests/albumcover1.png',1)` reads in an image as originally saved (a 0 would indicate greyscale)
@@ -106,3 +106,28 @@ Here are all of the template matching algorithms and how well they did in detect
 |<img width="200" height="150" src="https://user-images.githubusercontent.com/106715980/180112606-9719edb5-56a1-4cca-8400-dd62e364dc7c.png"> | <img width="200" height="150" src="https://user-images.githubusercontent.com/106715980/180112657-00e449e3-43a0-4d46-95bb-ee27368d1190.png"> | <img width="200" height="150" src="https://user-images.githubusercontent.com/106715980/180112720-015553d6-976c-4bd4-a78c-e1eec7c696f8.png">|
 
 Overall, most of the template matching algorithms worked
+
+## Face and Eye Detection
+
+`Haar Cascade`  is a pretrained classifier that looks at an image and tries to pick out specific features such as the distance between two centroids (eyes for example). It has been trained on hundreds of thousands of images. Each classifier searches for a specific feature
+
+`face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')` imports the face classifer
+
+`eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye.xml')` imports the eye classifier
+
+`faces= face_cascade.detectMultiScale(gray,1.3, 5)` detects faces, the parameters are (base image, scale factor, minimum neighbour)
+
+`scale factor` we are giving the haar cascade an image of an arbitrary size, it doesn’t know how big it is. We may have to change the size of the image so the cascade can have something to compare it against to. The recommended value is 1.05 which means shrinking it by 5% each iteration. The smaller the value leads to higher accuracy but a slower performing algorithm
+
+`minNeighbours`  is a parameter specifying how many neighbors each candidate rectangle should have to retain it. The haar cascade returns to us a bunch of positions of potential faces, this is saying how many candidate rectangles I need that are overlapping in a specific area before I determine that this is a face. In other words, how accurate does the algorithm need to be? Higher values result in less detection but with higher quality , 3-6 is a good value for this 
+
+`for (x,y,w,h) in faces:` for each face detection, there are x, y coordinates and width and heights
+
+`cv2.rectangle(frame,(x,y),(x+w, y+h), (255,0,0),5)` draws a rectangel around a detected face
+
+`roi_gray= gray[y:y+h,x: x+w ]` and `roi_color=frame[y:y+h,x:x+w ]` create subspaces in the face rectangle in gray and colour for eye detection to take place
+
+`eyes= eye_cascade.detectMultiScale(roi_gray, 1.3,5)` detects eyes (same parameters as before) and drawing rectangles is the same process
+
+![image](https://user-images.githubusercontent.com/106715980/180119050-d77c0abe-db84-48d9-b3c9-87143bc66fb2.png)
+
