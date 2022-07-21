@@ -77,3 +77,32 @@ I then applied this algorithm to my webcam instead of the chessboard image
 
 <img width="400" height="350" src="https://user-images.githubusercontent.com/106715980/179884856-c6c80031-e400-4843-af81-9100beb2f4e5.png">
 
+## Object Detection
+
+For this example I used an image of soccer players and an image of the ball within the picture as the object to detect. It  very important to resize the images so the soccer ball image is roughly how large it appears in the main image.
+
+Full Image | Target Image
+:---:|:---:
+<img width="150" height="150" src="https://user-images.githubusercontent.com/106715980/180109807-03b14987-7954-48b8-b6a8-03b71c91a863.jpg"> | <img width="150" height="150" src="https://user-images.githubusercontent.com/106715980/180109789-3296dcb8-7a1f-46d0-9b74-0d7506d53bdf.png">
+
+
+`methods= [cv2.TM_CCOEFF, cv2.TM_CCOEFF_NORMED, cv2. TM_CCORR, cv2.TM_CCORR_NORMED, cv2.TM_SQDIFF,cv2.TM_SQDIFF_NORMED]` are template matching methods from OpenCV
+
+`for method in methods:` iterates through each template matching method
+
+`result= cv2.matchTemplate(img2, template,method)` finds the region of detection 
+
+`min_val, max_val, min_loc, max_loc= cv2.minMaxLoc(result)`  and  `location= max_loc` stores the location of each detecion
+
+`bottom_right=(location[0]+ width, location[1]+ height)` finds the bottom right of the detection so a rectangle can be drawn
+
+Here are all of the template matching algorithms and how well they did in detecting the ball. Pictures are black/white because the algorithm works in greyscale
+
+
+|TM_CCOEFF | TM_CCOEFF_NORMED| TM_CCORR |
+|:---:|:---:|:---:|
+|<img width="200" height="150" src="https://user-images.githubusercontent.com/106715980/180112424-38bde2b6-31c1-4f64-b868-f52594031ccb.png"> | <img width="200" height="150" src="https://user-images.githubusercontent.com/106715980/180112463-df3e1c43-1daa-43ac-8cd3-48d00d4240f3.png"> | <img width="200" height="150" src="https://user-images.githubusercontent.com/106715980/180112542-5a88cc01-214d-4fbb-b935-112530135b26.png"> |
+|TM_CCOR_NORMED | TM_SQDIFF | TM_SQDIFF_NORMED|
+|<img width="200" height="150" src="https://user-images.githubusercontent.com/106715980/180112606-9719edb5-56a1-4cca-8400-dd62e364dc7c.png"> | <img width="200" height="150" src="https://user-images.githubusercontent.com/106715980/180112657-00e449e3-43a0-4d46-95bb-ee27368d1190.png"> | <img width="200" height="150" src="https://user-images.githubusercontent.com/106715980/180112720-015553d6-976c-4bd4-a78c-e1eec7c696f8.png">|
+
+Overall, most of the template matching algorithms worked
